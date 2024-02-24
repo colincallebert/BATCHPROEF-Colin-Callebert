@@ -3,15 +3,15 @@
 \section{Introductie}%
 \label{sec:introductie}
 
-Mijn bachelorproef zal zich focussen op de evoluerende complexiteit van moderne bedrijfsapplicaties en de architecturale benaderingen die worden ingezet om aan deze groeiende behoeften te voldoen. Het centrale thema van mijn onderzoek draait om de keuze tussen een monolithische architectuur en een microservices architectuur bij de ontwikkeling van bedrijfsapplicaties.
+De bachelorproef zal zich focussen op de evoluerende complexiteit van moderne bedrijfsapplicaties en de architecturale benaderingen die worden ingezet om aan deze groeiende behoeften te voldoen. Het kernthema van mijn onderzoek betreft de keuze tussen een monolithische architectuur en een microservices architectuur bij de ontwikkeling van bedrijfsapplicaties. Deze keuze wordt steeds relevanter vanwege de voortdurende toename en verandering van de complexiteit waarmee ondernemingen te maken hebben. Bedrijven overwegen vaak om de stabiliteit van een monolithische softwarearchitectuur los te laten en te opteren voor een servicegerichte architectuur. Het onderzoek is gedreven door de noodzaak van flexibiliteit in softwarearchitecturen, en daarom wordt de beweging van veel bedrijven om over te stappen van een monolithische naar een servicegerichte aanpak nauwgezet onderzocht. Het centrale thema van de bachelorproef is de vergelijking tussen beide architecturen, waarbij specifieke aandacht wordt besteed aan de voor- en nadelen van elk. De verschuiving naar een servicegerichte benadering wordt verder onderzocht met als doel richtlijnen te ontwikkelen voor bedrijven die deze overgang overwegen. Dit onderzoek wordt concreet toegepast in een casestudy over software in een dierenkliniek, waarmee praktische inzichten worden verkregen die relevant zijn voor de bredere context van bedrijfsapplicatieontwikkeling.
 
 In het kader van deze studie zal ik me specifiek richten op een dierenkliniekapplicatie, die zal eerst opgezet worden als een monolithische architectuur met behulp van Spring Boot. Deze applicatie omvat diverse functionaliteiten, zoals het beheer van klanten, dieren en artsen, het maken van afspraken, het registreren van prestaties, het aanmaken en verzenden van facturen, en het volgen van betalingen.
 
-Mijn onderzoek heeft als doel inzicht te bieden in de mogelijkheden van schaalbaarheid en prestatieverbetering door de overstap naar een microservices architectuur in combinatie met een servicemesh. Hierbij zal ik de functionaliteiten van de applicatie opdelen in verschillende microservices, zoals CRM, beheer van afspraken, beheer van prestaties, facturatie en betalingen. Deze microservices zullen vervolgens worden beheerd en met elkaar communiceren via een servicemesh.
+Het onderzoek heeft als doel inzicht te bieden in de mogelijkheden van schaalbaarheid en prestatieverbetering door de overstap naar een microservices architectuur in combinatie met een servicemesh. Hierbij zal ik de functionaliteiten van de applicatie opdelen in verschillende microservices, zoals CRM, beheer van afspraken, beheer van prestaties, facturatie en betalingen. Deze microservices zullen vervolgens worden beheerd en met elkaar communiceren via een servicemesh.
 
 Om dit doel te bereiken, zal ik me richten op de volgende aspecten:
 
-Kaderen van het thema: Het onderzoek zal de overgang van een monolithische naar een microservices architectuur in de context van bedrijfsapplicaties belichten, met bijzondere aandacht voor de dierenkliniekapplicatie.
+Kaderen van het thema: Het onderzoek zal de overstap van een monolithische naar een microservices architectuur in de context van bedrijfsapplicaties belichten, met bijzondere aandacht voor de dierenkliniekapplicatie.
 
 Doelgroep: De doelgroep van dit onderzoek zijn ontwikkelaars, architecten en besluitvormers die betrokken zijn bij de bouw en evolutie van bedrijfsapplicaties.
 
@@ -29,7 +29,7 @@ We kunnen de vergelijking maken  tussen monolithische en microservices architect
 
 Deze adoptie van microservices architectuur heeft geleid tot de opkomst van servicemeshes als een mechanisme voor het beheren van de communicatie en interactie tussen de verschillende services binnen een applicatie. Een servicemesh is een abstractielaag die een reeks functies biedt, zoals load balancing, service discovery, monitoring en beveiliging, die essentieel zijn voor het schalen en beheren van microservices.
 
-Een belangrijke architecturale overweging bij het gebruik van een servicemesh is service discovery. In tegenstelling tot een monolithische architectuur, waarbij services vaak hardgecodeerde afhankelijkheden hebben, maakt een servicemesh gebruik van dynamische service discovery. Dit stelt services in staat om automatisch nieuwe services te ontdekken en ermee te communiceren zonder handmatige configuratiewijzigingen. Een voorbeeld van een servicemesh implementatie die service discovery mogelijk maakt, is Istio\linebreak~\autocite{Morgan2021}.
+Een belangrijke architecturale overweging bij het gebruik van een servicemesh is service discovery. In tegenstelling tot een monolithische architectuur, waarbij functionaliteiten vaak hardgecodeerde afhankelijkheden hebben, maakt een servicemesh gebruik van dynamische service discovery. Dit stelt services in staat om automatisch nieuwe services te ontdekken en ermee te communiceren zonder handmatige configuratiewijzigingen. Een voorbeeld van een servicemesh implementatie die service discovery mogelijk maakt, is Istio\linebreak~\autocite{Morgan2021}.
 
 Een andere belangrijk aspect is load balancing. Een servicemesh verdeelt het verkeer gelijkmatig over de beschikbare service instances, waardoor de prestaties worden geoptimaliseerd, de belasting op afzonderlijke instances onder controle blijft en er ad hoc extra instances kunnen opgespind worden. Dit is vooral nuttig in bedrijfsapplicaties waar veel services parallel moeten worden geschaald om aan de vraag te voldoen~\autocite{Ciobotaru2020}.
 
@@ -79,7 +79,7 @@ Plan van aanpak
         
         \item Aanpak:
         \begin{itemize}
-            \item Opzetten van de sping-boot applicatie. Verder bouwen bestaande free ware git applicatie.
+            \item Opzetten van de spring-boot applicatie. Verder bouwen bestaande free ware git applicatie.
             \item Opzetten van een omgeving voor de implementatie van de servicemesh.
             \item Implementeren van de servicemesh en de microservices.
             \item Uitvoeren van tests en metingen om de schaalbaarheid en prestatieverbetering te beoordelen.
