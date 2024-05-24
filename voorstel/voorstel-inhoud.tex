@@ -25,9 +25,17 @@ In de vervolgstappen van dit onderzoeksvoorstel zal ik dieper ingaan op relevant
 \section{State-of-the-art}%
 \label{sec:state-of-the-art}
 
-We kunnen de vergelijking maken  tussen monolithische en microservices architectuur. Een monolithische architectuur bestaat uit één codebase met alle functionaliteit, terwijl een \linebreak microservices architectuur gebruik maakt van onafhankelijke services. Microservices bieden flexibiliteit en schaalbaarheid, maar brengen ook complexiteit met zich mee, zoals service discovery en monitoring. De juiste architectuurkeuze hangt af van de behoeften en complexiteit van het project.
+We kunnen de vergelijking maken  tussen monolithische en microservices architectuur. Een monolithische architectuur bestaat uit één codebase met alle functionaliteit, terwijl een  microservices architectuur gebruik maakt van onafhankelijke services. Microservices bieden flexibiliteit en schaalbaarheid, maar brengen ook complexiteit met zich mee, zoals service discovery en monitoring. De juiste architectuurkeuze hangt af van de behoeften en complexiteit van het project.
 
 Deze adoptie van microservices architectuur heeft geleid tot de opkomst van servicemeshes als een mechanisme voor het beheren van de communicatie en interactie tussen de verschillende services binnen een applicatie. Een servicemesh is een abstractielaag die een reeks functies biedt, zoals load balancing, service discovery, monitoring en beveiliging, die essentieel zijn voor het schalen en beheren van microservices.
+
+Een belangrijke architecturale overweging bij het gebruik van een servicemesh is service discovery. In tegenstelling tot een monolithische architectuur, waarbij functionaliteiten vaak hardgecodeerde afhankelijkheden hebben, maakt een servicemesh gebruik van dynamische service discovery. Dit stelt services in staat om automatisch nieuwe services te ontdekken en ermee te communiceren zonder handmatige configuratiewijzigingen. Een voorbeeld van een servicemesh implementatie die service discovery mogelijk maakt, is Istio \autocite{Morgan2021}.
+
+Een andere belangrijk aspect is load balancing. Een servicemesh verdeelt het verkeer gelijkmatig over de beschikbare service instances, waardoor de prestaties worden geoptimaliseerd, de belasting op afzonderlijke instances onder controle blijft en er ad hoc extra instances kunnen opgespind worden. Dit is vooral nuttig in bedrijfsapplicaties waar veel services parallel moeten worden geschaald om aan de vraag te voldoen \autocite{Ciobotaru2020}.
+
+Monitoring en tracing van service traffic zijn ook cruciale aspecten bij het gebruik van een servicemesh. Door het instrumenteren van services met monitoring- en tracingfunctionaliteit, kan een servicemesh gedetailleerd inzicht bieden in de prestaties en het gedrag van services. Dit is met name waardevol in bedrijfsapplicaties waar de complexiteit van de interacties tussen services kan leiden tot moeilijkheden bij het identificeren en oplossen van problemen \autocite{Ciobotaru2021}.
+
+Servicemeshes verhogen de weerbaarheid door het implementeren van verschillende resilience patterns. Hierdoor kan tijdelijke onbeschikbaarheid of overbelasting van services opgevangen worden.
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
@@ -37,219 +45,72 @@ Deze adoptie van microservices architectuur heeft geleid tot de opkomst van serv
 %   ...'')
 
 
-\section{Literatuuronderzoek}
-\label{sec:literatuuronderzoek}
-Voor er een vergelijking kan gemaakt worden tussen monolithische en microservices architectuur moeten we eerst eens terug kijken naar hoe deze twee architecturen zich tot elkaar verhouden.
+%---------- Methodologie ------------------------------------------------------
+\section{Methodologie}%
+\label{sec:methodologie}
 
-
-\subsection*{Monolithische architectuur}
-Laten we beginnen met monolithische applicaties, hoewel ze enkele voordelen bieden, worden vaak geconfronteerd met aanzienlijke nadelen die van invloed kunnen zijn op de ontwikkeling, schaalbaarheid en onderhoud van de software. 
-Een van de belangrijkste nadelen is de groeiende complexiteit van de codebase naarmate de applicatie evolueert. Deze toenemende complexiteit kan leiden tot overbelasting van de ontwikkelomgeving, waardoor de productiviteit van ontwikkelaars afneemt. Het veranderen van de technologiestack van de applicatie kan een uitdagende taak zijn, en het herstructureren van de codebase wordt bemoeilijkt door de onvoorspelbare impact op de applicatiefunctionaliteit. 
-Een kritiek punt is het risico van volledige uitval wanneer een enkele functie of component van de applicatie faalt. Bovendien neemt de kwaliteit van een monolithische architectuur geleidelijk af in de loop van de tijd door de constante toevoeging van nieuwe componenten, wat resulteert in een afname van de verwerkingssnelheid.
-De architectuur wordt ook als veeleisend ervaren om te begrijpen, vooral naarmate de codebase groeit. Dit vereist meestal een diepgaande kennis van het gehele systeem. Nieuwe ontwikkelaars hebben moeite om veranderingen in de volledige codebase te begrijpen, zelfs met gedetailleerde documentatie. Schaalbaarheidsproblemen, uitdagend onderhoud en moeilijkheden bij het upgraden van de applicatie vormen verdere obstakels. 
-Desondanks hebben monolithische applicaties enkele voordelen. Ze zijn eenvoudig te ontwikkelen, gemakkelijk te debuggen en niet veeleisend om op te zetten. Vooral geschikt voor kleine projecten, zoals MVP's of proof of concepts, bieden ze een eenvoudig te gebruiken en aanpasbaar ecosysteem. In situaties waar schaalvergroting niet nodig is, kunnen monolithische architecturen de benodigde oplossing bieden. Bovendien ervaren ze minder netwerkproblemen in vergelijking met microservices. Het is echter van cruciaal belang om deze voordelen af te wegen tegen de ernstige nadelen bij het kiezen van de juiste architectuur voor een specifieke toepassing.
-
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width = 9cm]{MonolithicImage1.png} 
-	\caption{Monoliet} 
-	\label{fig:Monoliet} 
-\end{figure}
-\FloatBarrier
-
-\subsection*{Microservices architectuur}
-Dan hebben we microservices-architecturen die een manier zijn  om grote softwareprojecten op te splitsen in losjes gekoppelde modules, die met elkaar communiceren via eenvoudige Application Programming Interfaces (API's). Volgens Adrian Cockcroft, voorheen werkzaam bij Netflix, is "Een microservices-architectuur een servicegerichte architectuur, samengesteld uit losjes gekoppelde elementen met begrensde contexten " (vertaald vanuit het Engels) ~\autocite{Richardson2018}.
-
-Microservices bieden diverse voordelen die gericht zijn op flexibiliteit, schaalbaarheid en foutisolatie. Eén van de belangrijkste voordelen is de mogelijkheid om onafhankelijke, herbruikbare componenten te creëren. Deze componenten kunnen afzonderlijk worden geïmplementeerd in andere applicaties zonder invloed op andere eenheden. Het modulaire karakter van microservices maakt het eenvoudig te debuggen, schalen en begrijpen, wat bijdraagt aan een snellere ontwikkeling en implementatie. 
-Microservices stellen ontwikkelaars in staat om specifieke componenten te schalen of ongewijzigd te laten, waardoor een hoog niveau van flexibiliteit ontstaat. Verbeterde foutisolatie is ook een voordeel, omdat falen in één module de prestaties van de gehele applicatie niet significant beïnvloedt. Daarnaast biedt de mogelijkheid om nieuwe technologieën toe te voegen en te testen, evenals het elimineren van leverancier- of technologielock-in, extra voordelen voor wendbaarheid en innovatie. 
-
-Aan de andere kant zijn er ook nadelen verbonden aan microservices. De architectuur kan te ingewikkeld worden naarmate het systeem groeit, waardoor het beheer bemoeilijkt wordt. Het testen kan veeleisend zijn, vooral bij complexe systemen, en het onderhoud kan duurder worden naarmate meer eenheden worden toegevoegd. Beveiligingsproblemen zijn een zorg, aangezien de gedistribueerde aard van microservices verschillende faalpunten introduceert. 
-De complexiteit van communicatie tussen services, de kosten van individuele servers en databases voor elke microservice, en de kwetsbaarheid voor beveiligingsproblemen zijn belangrijke nadelen. Ook brengt de complexiteit van coördinatie tussen services uitdagingen met zich mee bij implementatie, vooral voor kleine bedrijven die snel willen creëren en itereren. Het testen van microservices-gebaseerde applicaties kan omslachtig zijn, en het opsporen van fouten vereist grondig doorzoeken van de logboeken van elke service. 
-Hoewel microservices veel voordelen bieden, moeten organisaties zorgvuldig afwegen of de voordelen opwegen tegen de complexiteit en uitdagingen die de implementatie van deze architectuur met zich meebrengt.
-
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width = 9cm]{MicroserviceImage1.png} 
-	\caption{Microservice} 
-	\label{fig:Microservice} 
-\end{figure}
-\FloatBarrier
-
-\subsection*{Lehman's wetten van software-evolutie}
-Al lang voor het ontstaan van microservice kwam Lehman met zijn acht wetten van software-evolutie. Deze wetten beschrijven de dynamiek van softwaresystemen over tijd en benadrukken de noodzaak van voortdurende aanpassing aan nieuwe behoeften, beheersing van toenemende complexiteit, en behoud van stabiliteit en bekendheid. Het behoud van organisatorische stabiliteit en bekendheid, gecombineerd met voortdurende groei in functionaliteit, vormt de kern van Lehman's inzichten. Tevens waarschuwen de wetten voor mogelijke afname in kwaliteit over tijd, waarbij een feedbacksysteem cruciaal is voor een succesvolle evolutie, met erkenning van de rol van gebruikersfeedback in het stimuleren van toekomstige ontwikkelingen.
-
-\begin{enumerate}
-	\item \textbf{Continuing Change:} Lehman stelt dat een softwaresysteem in de loop der tijd steeds minder bevredigend wordt voor gebruikers, tenzij het voortdurend wordt aangepast aan nieuwe behoeften. De noodzaak van voortdurende aanpassing staat hierbij centraal.
+Plan van aanpak
+\begin{itemize}
 	
-	\item \textbf{Increasing Complexity:} Softwaresystemen worden volgens Lehman steeds complexer, tenzij actieve inspanningen worden geleverd om deze complexiteit te verminderen. Deze wet benadrukt de essentie van proactieve maatregelen om de inherente neiging tot complexiteitsgroei te beheersen.
-	
-	\item \textbf{Self-Regulation:} Het proces van software-evolutie reguleert volgens Lehman zichzelf, met een distributie van product- en procesartefacten die dicht bij normaal ligt. Dit impliceert een natuurlijk evenwicht in het evolutieproces, in lijn met typische statistische patronen.
-	
-	\item \textbf{Conservation of Organizational Stability:} Het gemiddelde effectieve wereldwijde activiteitsniveau op een evoluerend softwaresysteem verandert niet in de loop der tijd. Dit suggereert dat de hoeveelheid werk in elke release volgens Lehman relatief constant blijft en bijdraagt aan de stabiliteit van het ontwikkelingsproces.
-	
-	\item \textbf{Conservation of Familiarity:} De hoeveelheid nieuwe inhoud in opeenvolgende releases neigt constant te blijven of af te nemen. Deze wet belicht de trend om het behoud of de vermindering van de introductie van nieuwe elementen in software-releases.
-	
-	\item \textbf{Continuing Growth:} De hoeveelheid functionaliteit in een softwaresysteem zal toenemen om aan de verwachtingen van gebruikers te voldoen. Dit erkent de noodzaak om de mogelijkheden van software te verbeteren voor voortdurende relevantie en bruikbaarheid.
-	
-	\item \textbf{Declining Quality:} Een softwaresysteem wordt gezien als afnemend in kwaliteit, tenzij het ontwerp zorgvuldig wordt onderhouden en aangepast aan nieuwe operationele beperkingen. Dit onderstreept het belang van continue kwaliteitsborging en ontwerpoverwegingen.
-	
-	\item \textbf{Feedback System:} Het succesvol evolueren van een softwaresysteem vereist erkenning van het ontwikkelingsproces als een multi-loop, multi-agent, multi-level feedbacksysteem. Naarmate een softwaresysteem ouder wordt, wordt het steeds moeilijker te veranderen vanwege de complexiteit van zowel artefacten als processen, waarbij de rol van gebruikersfeedback in de toekomstige evolutie wordt erkend. ~\autocite{Godfrey2013}
-\end{enumerate}
+	\item Fase 1: Literatuuronderzoek en probleemdefinitie (Week 1-2)
+	\begin{itemize}
+		\item Doelstelling: Een grondig begrip ontwikkelen van servicemesh, schaalbaarheid en prestatieproblemen in bedrijfsapplicaties en de architecturale overwegingen en best practices bij het implementeren van een servicemesh identificeren.
+		\item Aanpak:
+		\begin{itemize}
+			\item Uitvoeren van een literatuuronderzoek naar servicemesh technologieën, schaalbaarheid, prestatieproblemen en best practices voor bedrijfsapplicaties.
+			\item Identificeren van de belangrijkste architecturale verschillen tussen servicemesh- en monolithische architecturen.
+			\item Analyseren van casestudies en praktijkvoorbeelden om inzicht te krijgen in de voordelen en uitdagingen van het gebruik van servicemesh voor schaalbaarheid en prestatieverbetering.
+		\end{itemize}        
+		\item Resultaat, deliverable(s): Een gedetailleerd overzicht kunnen geven van de concepten en technologieën met betrekking tot servicemesh, schaalbaarheid en prestatieverbetering
+	\end{itemize}            
+	\item Fase 2: Architecturale overwegingen en best practices identificeren (Week 3-4)
+	\begin{itemize}
+		\item Doelstelling De belangrijkste architecturale overwegingen en best practices identificeren die van toepassing zijn op het implementeren van een servicemesh voor schaalbaarheid en prestaties in bedrijfsapplicaties.
+		\item Aanpak: 
+		\begin{itemize}        
+			\item Analyseren van de literatuur en case studies om patronen en gemeenschappelijke elementen te identificeren in de implementatie van servicemesh architecturen.
+			\item Analyseren van casestudies en praktijkvoorbeelden om inzicht te krijgen in de voordelen en uitdagingen van het gebruik van servicemesh voor schaalbaarheid en prestatieverbetering.
+		\end{itemize}            
+		\item Resultaat, deliverable(s): Een lijst met belangrijke architecturale overwegingen en best practices voor het implementeren van een servicemesh in bedrijfsapplicaties en een samenvatting van de verschillen tussen servicemesh en monolithische architecturen met betrekking tot schaalbaarheid en prestatieverbetering.
+	\end{itemize}
+	\item Fase 3: Casus Implementatie (Week 5-8)
+	\begin{itemize}
+		\item Doelstelling: het implementeren van zowel de monolithische applicatie als de microservices, met servicemesh implementatie, voor de functionaliteiten van de dierenkliniek \autocite{RameshMF2018}. 
+		
+		\item Aanpak:
+		\begin{itemize}
+			\item Opzetten van de spring-boot applicatie. Verder bouwen bestaande free ware git applicatie.
+			\item Opzetten van een omgeving voor de implementatie van de servicemesh.
+			\item Implementeren van de servicemesh en de microservices.
+			\item Uitvoeren van tests en metingen om de schaalbaarheid en prestatieverbetering te beoordelen.
+		\end{itemize}   
+		\item Resultaat, deliverable(s): Een experimentele implementatie van een servicemesh en een evaluatie van de architecturale overwegingen en best practices.
+	\end{itemize}  
+	\item Fase 4: Vergelijkende analyse en conclusies (Week 9-11)
+	\begin{itemize} 
+		\item Doelstelling: Een vergelijkende analyse uitvoeren tussen de servicemesh architectuur en de monolithische architectuur om de verschillen in schaalbaarheid, prestaties en andere relevante aspecten te begrijpen. Op basis hiervan conclusies trekken en aanbevelingen doen.
+		\item Aanpak:
+		\begin{itemize} 
+			\item Verzamelen van gegevens en resultaten van eerdere fasen, inclusief literatuuronderzoek, casestudies en experimentele implementatie.
+			\item Analyseren van de verzamelde gegevens om de verschillen tussen servicemesh en monolithische architecturen te identificeren, met betrekking tot schaalbaarheid, prestaties, onderhoud, flexibiliteit ...
+			\item Trekken van conclusies op basis van de analyse en het formuleren van aanbevelingen voor de toepassing van servicemesh in bedrijfsapplicaties.
+		\end{itemize}     
+		\item Resultaat, deliverable(s):  Een vergelijkende analyse tussen servicemesh en monolithische architecturen, inclusief conclusies en aanbevelingen voor het gebruik van servicemesh in bedrijfsapplicaties.
+	\end{itemize}   
+	\item Fase 5: Afronding (Week 12-13)
+	\begin{itemize} 
+		\item Doelstelling: Het onderzoeksvoorstel afronden.
+		\item Aanpak:
+		\begin{itemize} 
+			\item Samenstellen en schrijven van het eindrapport van de bachelorproef.
+			\item Nakijken, herzien en redigeren van het rapport.
+			\item Voorbereiden en indienen van het rapport.
+		\end{itemize}     
+		\item Resultaat, deliverable(s): Eindrapport van de bachelorproef.  
+	\end{itemize}
+\end{itemize}
 
-\subsection*{Ontstaan van Microservices}
-Microservices zijn ontstaan uit frustraties met traditionele monolithische architectuur. Deze benadering omvat het bouwen van applicaties als suites van onafhankelijke, schaalbare services. Elke service heeft een duidelijke modulegrens, waardoor ze zelfs in verschillende programmeertalen kunnen worden geschreven en door verschillende teams kunnen worden beheerd. De microservices-stijl is niets nieuws. De oorsprong gaat terug tot Unix-ontwerpprincipes. Hoewel er geen formele definitie bestaat, delen microservice-architecturen gemeenschappelijke kenmerken die bijdragen aan hun flexibiliteit en schaalbaarheid. ~\autocite{Fowler2014}.
-
-\begin{enumerate}
-	\item \textbf{Componentization via Services:} Microservices worden behandeld als onafhankelijke componenten die afzonderlijk kunnen worden geïmplementeerd en bijgewerkt.
-	
-	\item \textbf{Organized around Business Capabilities:} Microservices zijn georganiseerd rond zakelijke mogelijkheden, wat betekent dat elke service overeenkomt met een zakelijke functionaliteit.
-	
-	\item \textbf{Products not Projects:} teams bezitten een bepaald product gedurende de volledige levensduur ervan, in plaats van alleen maar aan projecten te werken.
-	
-	\item \textbf{Smart endpoints and dumb pipes:} Applicaties die zijn opgebouwd uit microservices streven ernaar zo ontkoppeld en samenhangend mogelijk te zijn. Ze communiceren met elkaar via eenvoudige API’s, terwijl ze de onderliggende communicatie-complexiteit \linebreak  weghouden van de services. 
-	
-	\item \textbf{Decentralized Governance:} Verschillende diensten kunnen verschillende technologieën gebruiken (programmeertalen, databases, enz.). Er is geen gestandaardiseerd mandaat voor alle diensten.
-	
-	\item \textbf{Decentralized Data Management:} Elke dienst heeft zijn eigen database om de ontkoppeling van andere diensten te garanderen.
-	
-	\item \textbf{Infrastructure Automation:} gebruik van continue integratie en continue implementatie om de services te beheren.
-	
-	\item \textbf{Design for failure:} Diensten moeten worden ontworpen met het oog op het feit dat ze zullen mislukken. Dit helpt bij het bouwen van veerkrachtige systemen.
-	
-	\item \textbf{Evolutionary Design:} Het is de bedoeling dat het systeemontwerp in de loop van de tijd evolueert, en nieuwe technologieën en praktijken kunnen worden toegepast wanneer dat nodig is. ~\autocite{Fowler2014}.
-\end{enumerate}
-
-\subsection*{Servicemeshes}
-Deze adoptie van microservices architectuur heeft geleid tot de opkomst van servicemeshes als een mechanisme voor het beheren van de communicatie en interactie tussen de verschillende services binnen een applicatie. Een servicemesh is een abstractielaag die een reeks functies biedt, zoals load balancing, service discovery, monitoring en beveiliging, die essentieel zijn voor het schalen en beheren van microservices.
-
-Een belangrijke architecturale overweging bij het gebruik van een servicemesh is service discovery. In tegenstelling tot een monolithische architectuur, waarbij functionaliteiten vaak hardgecodeerde afhankelijkheden hebben, maakt een servicemesh gebruik van dynamische service discovery. Dit stelt services in staat om automatisch nieuwe services te ontdekken en ermee te communiceren zonder handmatige configuratiewijzigingen. Een voorbeeld van een servicemesh implementatie die service discovery mogelijk maakt, is Istio ~\autocite{Morgan2021}.
-
-Een andere belangrijk aspect is load balancing. Een servicemesh verdeelt het verkeer gelijkmatig over de beschikbare service instances, waardoor de prestaties worden geoptimaliseerd, de belasting op afzonderlijke instances onder controle blijft en er ad hoc extra instances kunnen opgespind worden. Dit is vooral nuttig in bedrijfsapplicaties waar veel services parallel moeten worden geschaald om aan de vraag te voldoen ~\autocite{Ciobotaru2020}.
-
-Monitoring en tracing van service traffic zijn ook cruciale aspecten bij het gebruik van een servicemesh. Door het instrumenteren van services met monitoring- en tracingfunctionaliteit, kan een servicemesh gedetailleerd inzicht bieden in de prestaties en het gedrag van services. Dit is met name waardevol in bedrijfsapplicaties waar de complexiteit van de interacties tussen services kan leiden tot moeilijkheden bij het identificeren en oplossen van problemen \linebreak ~\autocite{Ciobotaru2021}.
-
-Servicemeshes verhogen de weerbaarheid door het implementeren van verschillende resilience patterns. Hierdoor kan tijdelijke onbeschikbaarheid of overbelasting van services opgevangen worden.
-
-\subsection*{Kort samengevat}
-
-Een monolithische architectuur biedt eenvoud en een eenvoudige implementatie, maar kan het uitdagend zijn bij groei. Microservices bieden flexibiliteit en schaalbaarheid, maar kunnen complexer en duurder zijn in onderhoud.
-
-Een monolithische architectuur bestaat uit één codebase met alle functionaliteit, terwijl een \linebreak microservices architectuur gebruik maakt van onafhankelijke services. Microservices bieden flexibiliteit en schaalbaarheid, maar brengen ook complexiteit met zich mee, zoals service discovery en monitoring. De juiste architectuurkeuze hangt af van de behoeften en complexiteit van het project.
-
-Lehman's acht wetten van software-evolutie schetsen de dynamiek van softwaresystemen in de loop van de tijd. Ze onderstrepen de noodzaak van voortdurende aanpassing aan nieuwe behoeften, het beheersen van toenemende complexiteit, en het handhaven van evenwicht in het evolutieproces. Het behoud van organisatorische stabiliteit en vertrouwdheid, tezamen met voortdurende groei in functionaliteit, vormt de kern van Lehman's inzichten. Tegelijkertijd waarschuwen de wetten voor mogelijke afname in kwaliteit na verloop van tijd, waarbij een feedbacksysteem cruciaal is voor een succesvolle evolutie, met erkenning van de rol van gebruikersfeedback in het stimuleren van toekomstige ontwikkelingen. 
-
-Lehman's wetten vinden dus toepassing in zowel monolithische als gedistribueerde (microservices) systemen. In het geval van monolithische architecturen benadrukken deze wetten de noodzaak van voortdurende aanpassing aan veranderende eisen, beheersing van complexiteit, en behoud van stabiliteit en bekendheid. 
-
-De vraag rijst echter of Microservices een oplossing kunnen bieden voor enkele uitdagingen die voortvloeien uit Lehman's wetten.
-
-
-\section{Opzetten van de Architectuur}
-\label{sec:architectuur}
-Voor de implementatie van mijn microservices heb ik gekozen voor Istio. Om vertrouwd te raken met dit hulpmiddel, ben ik begonnen met het opzetten van een eenvoudige microservice die gebruikmaakt van voorbeeldgegevens.
-
-De eerste stap was het downloaden van Istio. Dit kan worden gedaan door de volgende opdrachten uit te voeren:
-
-\begin{lstlisting}[language=bash]
-$ curl -L https://istio.io/downloadIstio | sh -
-$ cd istio-1.21.1
-$ export PATH=$PWD/bin:$PATH
-\end{lstlisting}
-
-Nadat dit is voltooid, kan Istio worden geïnstalleerd met het volgende commando:
-
-\begin{lstlisting}[language=bash]
-$ istioctl install --set profile=demo -y
-\end{lstlisting}
-
-Voordat u dit commando uitvoert, moet u echter eerst een Kubernetes-cluster hebben opgezet. Als u nog geen Kubernetes heeft geïnstalleerd, kunt u dit doen met het volgende commando:
-
-\begin{lstlisting}[language=bash]
-$ brew install kubectl
-\end{lstlisting}
-
-Dit kan worden gedaan met behulp van Minikube en Hyperkit. De installatie van Minikube en Hyperkit kan worden uitgevoerd met de volgende commando's:
-
-\begin{lstlisting}[language=bash]
-$ brew install minikube
-$ brew install hyperkit
-\end{lstlisting}
-
-Als Minikube en Hyperkit zijn geïnstalleerd, kunt u een cluster opzetten met het volgende commando:
-
-\begin{lstlisting}[language=bash]
-$ minikube start --driver=hyperkit
-\end{lstlisting}
-
-Nadat u dit heeft gedaan, kunt u Istio installeren met het eerder genoemde commando. Als laatste stap moet u nog de Istio sidecar-injectie inschakelen met het commando:
-
-\begin{lstlisting}[language=bash]
-$ kubectl label namespace default istio-injection=enabled
-\end{lstlisting}
-
-Vervolgens heb ik de voorbeeldapplicatie gedeployed met het volgende commando:
-
-\begin{lstlisting}[language=bash]
-$ kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-\end{lstlisting}
-
-Zorg ervoor dat alle pods en services actief zijn door de volgende commando's uit te voeren:
-
-\begin{lstlisting}[language=bash]
-$ kubectl get services
-$ kubectl get pods
-\end{lstlisting}
-
-De volgende stap is het verbinden met een Istio gateway. Dit kan worden gedaan met het commando:
-
-\begin{lstlisting}[language=bash]
-$ kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-\end{lstlisting}
-
-Dit kunt u controleren met het \verb|istioctl analyze| commando. Vervolgens moeten de ingress host en poort worden ingesteld. Dit heb ik gedaan door eerst het \verb|minikube tunnel| commando uit te voeren en vervolgens de volgende commando's uit te voeren:
-
-\begin{lstlisting}[language=bash]
-$ export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-$ export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-$ export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].port}')
-\end{lstlisting}
-
-Om de gateway-URL te krijgen, kunt u het volgende commando uitvoeren:
-
-\begin{lstlisting}[language=bash]
-$ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-\end{lstlisting}
-
-Nu kunt u de gateway-URL gebruiken om de applicatie te bekijken in uw browser. Met het volgende commando kunt u de weblink verkrijgen:
-
-\begin{lstlisting}[language=bash]
-$ echo "http://$GATEWAY_URL/productpage"
-\end{lstlisting}
-
-Door dit commando uit te voeren, krijgt u de URL van de webpagina.
-
-De volgende stap is om te zien wat er gebeurt op een dashboard. Dit kan worden bereikt met de volgende commando's:
-
-\begin{lstlisting}[language=bash]
-$ kubectl apply -f samples/addons
-$ kubectl rollout status deployment/kiali -n istio-system
-\end{lstlisting}
-
-Vervolgens kunt u het Kiali-dashboard openen met het volgende commando:
-
-\begin{lstlisting}[language=bash]
-$ istioctl dashboard kiali
-\end{lstlisting}
-
-Dit opent een dashboard waar u de interacties tussen de verschillende services kunt bekijken.
-
-\begin{figure}[b]
-	\centering	
-	\includegraphics[width = \textwidth]{kailiConsole1.png} 
-	\caption{Kaili Console} 
-	\label{fig:kaili1} 
-\end{figure}
-\FloatBarrier
-
+Gedetailleerde flowchart (\ref{fig:flowchart}) en gantt-chart (\ref{fig:gantt}) vind je onderaan terug.
 
 
 \section{Verwachte resultaten}%
@@ -271,13 +132,13 @@ Ten slotte vermoed ik dat de implementatie van een servicemesh in bedrijfsapplic
 
 \begin{figure*}[t]   
 	\centering   
-	\includegraphics[width = \textwidth]{flowchart.png}  
+	\includegraphics[width = \textwidth]{Flowchart.png}  
 	\caption{Flow chart}
 	\label{fig:flowchart}				 
 \end{figure*} 
 \begin{figure*}[t]   
 	\centering   
-	\includegraphics[width = \textwidth]{gantt.png}   
+	\includegraphics[width = \textwidth]{Gantt.png}   
 	\caption{Gantt chart}	
 	\label{fig:gantt}	
-\end{figure*} 
+\end{figure*}

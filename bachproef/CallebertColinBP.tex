@@ -12,6 +12,10 @@
 %   explicit approval!), remove the option "dutch," or replace with "english".
 
 \usepackage{lipsum} % For blind text, can be removed after adding actual content
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{graphics}
+\usepackage{biblatex}
 
 %% Pictures to include in the text can be put in the graphics/ folder
 \graphicspath{{graphics/}}
@@ -52,11 +56,11 @@
 
 %%---------- Document metadata -------------------------------------------------
 % TODO: Replace this with your own information
-\author{Ernst Aarden}
-\supervisor{Dhr. F. Van Houte}
-\cosupervisor{Mevr. S. Beeckman}
-\title[Optionele ondertitel]%
-    {Titel van de bachelorproef}
+\author{Colin Callebert}
+\supervisor{Dhr. Jan Claes}
+\cosupervisor{Dhr. David Vanden Bussche}
+\title{Voor- en nadelen van een service-\linebreak architectuur voor bedrijfsapplicaties:\linebreak architecturale overwegingen en best practices}
+
 \academicyear{\advance\year by -1 \the\year--\advance\year by 1 \the\year}
 \examperiod{1}
 \degreesought{\IfLanguageName{dutch}{Professionele bachelor in de toegepaste informatica}{Bachelor of applied computer science}}
@@ -68,8 +72,7 @@
 
 %% The bibliography (style and settings are  found in hogentthesis.cls)
 \addbibresource{bachproef.bib}            %% Bibliography file
-\addbibresource{../voorstel/voorstel.bib} %% Bibliography research proposal
-\defbibheading{bibempty}{}
+%\addbibresource{../voorstel/voorstel.bib} %% Bibliography research proposal
 
 %% Prevent empty pages for right-handed chapter starts in twoside mode
 \renewcommand{\cleardoublepage}{\clearpage}
@@ -144,6 +147,12 @@
 %\input{...}
 %...
 
+\input{keuze-software}
+\input{monoliet}
+\input{opsplitsen-backend}
+\input{docker-backend}
+\input{implementatie-backend-istio}
+\input{testen-prestatieanalyse}
 \input{conclusie}
 
 %---------- Bijlagen -----------------------------------------------------------
@@ -155,23 +164,28 @@
 Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat vooraf werd beoordeeld door de promotor. Dat voorstel is opgenomen in deze bijlage.
 
 %% TODO: 
-%\section*{Samenvatting}
+\section*{Samenvatting}
 
 % Kopieer en plak hier de samenvatting (abstract) van je onderzoeksvoorstel.
+Bij een monolithische architectuur wordt er slechts één applicatie met een centrale codebase en infrastuctuur gebruikt. In een microservice architectuur wordt de functionaliteit opgesplitst in kleinere op zichzelf werkende applicaties, die elk hun centrale codebase en infrastuctuur gebruiken.
+Het is belangrijk om bij het kiezen van de architectuur rekening te houden met de specifieke behoeften van de applicatie en de bedrijfsdoelstellingen.
+Microservices kunnen bijvoorbeeld helpen bij het versnellen van de ontwikkelingstijd en het verminderen van de complexiteit van de applicatie, terwijl een monolithische architectuur beter geschikt kan zijn voor minder complexe applicaties die minder onderhoud vereisen.
+Bij het implementeren van microservices zijn load balancing, service discovery, netwerkbeveiliging en weerbaarheid belangrijke aspecten om de schaalbaarheid en prestaties te garanderen. Servicemeshes bieden functionaliteit om deze uitdagingen aan te pakken.
+Bij het opzetten van een servicemesh in bedrijfsapplicaties is het heel belangrijk om architecturale overwegingen en best practices in acht te nemen om een optimale schaalbaarheid en prestaties te garanderen.
 
 % Verwijzing naar het bestand met de inhoud van het onderzoeksvoorstel
 \input{../voorstel/voorstel-inhoud}
-
 %%---------- Andere bijlagen --------------------------------------------------
 % TODO: Voeg hier eventuele andere bijlagen toe. Bv. als je deze BP voor de
 % tweede keer indient, een overzicht van de verbeteringen t.o.v. het origineel.
 %\input{...}
-
+\chapter{software}
+\input{software}
 %%---------- Backmatter, referentielijst ---------------------------------------
 
 \backmatter{}
 
 \setlength\bibitemsep{2pt} %% Add Some space between the bibliograpy entries
-\printbibliography[heading=bibintoc]
+\printbibliography
 
 \end{document}

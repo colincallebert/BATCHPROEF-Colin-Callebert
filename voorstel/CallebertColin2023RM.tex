@@ -1,0 +1,207 @@
+\documentclass{hogent-article}
+
+
+% Invoegen bibliografiebestand
+\usepackage{biblatex}
+\bibliography{bibliografie.bib}
+
+% Informatie over de opleiding, het vak en soort opdracht
+\studyprogramme{Professionele bachelor toegepaste informatica}
+\course{Research Methods}
+\assignmenttype{Paper: Onderzoeksvoorstel}
+\academicyear{2022-2023} 
+
+
+\title{Wat zijn de belangrijkste architecturale overwegingen en best practices voor implementatie bij het gebruik van een servicemesh om schaalbaarheid en prestaties te bereiken in bedrijfsapplicaties en hoe verschillen deze van monolithische architectuur?}
+
+\author{Colin Callebert}
+\email{colin.callebert@student.hogent.be}
+
+% TODO (fase 1): Geef hier de link naar jullie Github-repository
+\projectrepo{https://github.com/HoGentTIN/rm-2223-paper-rmcallebertc}
+
+% Binnen welke specialisatierichting uit 3TI situeert dit onderzoek zich?
+% Kies uit deze lijst:
+%
+% - Mobile \& Enterprise development
+% - AI \& Data Engineering
+% - Functional \& Business Analysis
+% - System \& Network Administrator
+% - Mainframe Expert
+% - Als het onderzoek niet past binnen een van deze domeinen specifieer je deze
+%   zelf
+%
+\specialisation{System \&  Network Administrator}
+% Geef hier enkele sleutelwoorden die je onderwerp beschrijven
+\keywords{Servicemesh, Microservices, Schaalbaarheid, Prestaties, Architectuur, $\lambda$-calculus}
+
+\begin{document}
+
+\begin{abstract}
+  Bij een monolithische architectuur wordt er slechts één applicatie met een centrale codebase en infrastuctuur gebruikt. In een microservice architectuur wordt de functionaliteit opgesplitst in kleinere op zichzelf werkende applicaties, die elk hun centrale codebase en infrastuctuur gebruiken.
+  Het is belangrijk om bij het kiezen van de architectuur rekening te houden met de specifieke behoeften van de applicatie en de bedrijfsdoelstellingen.
+  Microservices kunnen bijvoorbeeld helpen bij het versnellen van de ontwikkelingstijd en het verminderen van de complexiteit van de applicatie, terwijl een monolithische architectuur beter geschikt kan zijn voor minder complexe applicaties die minder onderhoud vereisen.
+  Bij het implementeren van microservices zijn load balancing, service discovery, netwerkbeveiliging en weerbaarheid belangrijke aspecten om de schaalbaarheid en prestaties te garanderen. Servicemeshes bieden functionaliteit om deze uitdagingen aan te pakken.
+  Bij het opzetten van een servicemesh in bedrijfsapplicaties is het heel belangrijk om architecturale overwegingen en best practices in acht te nemen om een optimale schaalbaarheid en prestaties te garanderen.
+\end{abstract}
+
+\tableofcontents
+
+\bigskip
+
+% TODO: Neem je dit jaar ook de bachelorproef op? Haal dan de tekst hieronder
+% uit commentaar en pas het aan.
+
+%\paragraph{Opmerking}
+
+% Ik neem dit jaar ook de bachelorproef op. De inhoud van dit onderzoeksvoorstel dient ook als het onderwerpvoor mijn bachelorproef. Mijn promotor is (Mr./Mevr.) X.\ Familienaam.
+
+% Beschrijf de eventuele verschillen en/of verbeteringen in dit document t.o.v.\ jouw onderzoeksvoorstel dat je ingediend hebt voor de bachelorproef.
+
+\section{Inleiding}%
+\label{sec:inleiding}
+
+De complexiteit van moderne bedrijfsapplicaties groeit voortdurend, wat heeft geleid tot de opkomst van verschillende architecturale benaderingen om aan deze behoeften te voldoen. Eén van de belangrijkste overwegingen bij het ontwikkelen van een applicatie is de keuze tussen een monolithische architectuur en een microservices architectuur. 
+
+
+Bij een monolithische architectuur wordt er slechts één applicatie met een centrale codebase en infrastructuur gebruikt. Deze aanpak is over het algemeen eenvoudiger te implementeren en te beheren, maar kan problematisch worden naarmate de applicatie groter wordt. Bij een monolithische architectuur wordt de hele functionaliteit binnen één enkele codebase ondergebracht, wat kan leiden tot problemen met onderhoud, schaalbaarheid en flexibiliteit.
+
+
+Daartegenover staat de microservices architectuur, waarbij de functionaliteit wordt opgedeeld in kleinere, onafhankelijke services. Dit biedt voordelen zoals schaalbaarheid, onderhoudbaarheid en flexibiliteit, maar introduceert ook complexiteit in termen van communicatie en coördinatie tussen deze services.
+
+
+In dit onderzoek richten we ons op een specifieke casus: een applicatie voor het beheer van een dierenkliniek. Deze applicatie omvat verschillende functionaliteiten, zoals het beheer van klanten, dieren en artsen, het maken van afspraken, het registreren van prestaties, het aanmaken en verzenden van facturen en het volgen van betalingen. De huidige implementatie van deze applicatie is een monolithische architectuur gebouwd met behulp van Spring Boot.
+
+
+Om de mogelijkheden van schaalbaarheid en prestatieverbetering verder te verkennen, willen we onderzoeken hoe deze applicatie zou kunnen profiteren van een microservices architectuur in combinatie met een servicemesh. We zullen de functionaliteiten van de applicatie opsplitsen in verschillende microservices, zoals CRM, beheer van afspraken, beheer van prestaties, facturatie en betalingen. Deze microservices zouden dan via een servicemesh worden beheerd en met elkaar communiceren.
+
+
+Dit onderzoek beoogt inzicht te verschaffen in de belangrijkste architecturale overwegingen en best practices bij het gebruik van een servicemesh om schaalbaarheid en prestaties te bereiken in bedrijfsapplicaties. We zullen de voordelen, uitdagingen en mogelijke impact van een dergelijke architectuurverandering voor de dierenkliniekapplicatie onderzoeken. Daarnaast zullen we deze bevindingen vergelijken met de huidige monolithische implementatie om de verschillen en mogelijke voordelen duidelijk te identificeren.
+
+
+In de volgende secties van dit onderzoeksvoorstel zullen we dieper ingaan op de literatuur die relevant is voor dit onderzoek, de methodologie die we zullen gebruiken en de verwachte resultaten en conclusies die we hopen te bereiken.
+
+
+\section{Literatuurstudie}%
+\label{sec:literatuurstudie}
+
+% TODO: (fase 4) schrijf de literatuurstudie uit en gebruik waar gepast referenties naar de vakliteratuur.
+
+We kunnen de vergelijking maken  tussen monolithische en microservices architectuur. Een monolithische architectuur bestaat uit één codebase met alle functionaliteit, terwijl een \linebreak microservices architectuur gebruik maakt van onafhankelijke services. Microservices bieden flexibiliteit en schaalbaarheid, maar brengen ook complexiteit met zich mee, zoals service discovery en monitoring. De juiste architectuurkeuze hangt af van de behoeften en complexiteit van het project.
+
+Deze adoptie van microservices architectuur heeft geleid tot de opkomst van servicemeshes als een mechanisme voor het beheren van de communicatie en interactie tussen de verschillende services binnen een applicatie. Een servicemesh is een abstractielaag die een reeks functies biedt, zoals load balancing, service discovery, monitoring en beveiliging, die essentieel zijn voor het schalen en beheren van microservices.
+
+Een belangrijke architecturale overweging bij het gebruik van een servicemesh is service discovery. In tegenstelling tot een monolithische architectuur, waarbij services vaak hardgecodeerde afhankelijkheden hebben, maakt een servicemesh gebruik van dynamische service discovery. Dit stelt services in staat om automatisch nieuwe services te ontdekken en ermee te communiceren zonder handmatige configuratiewijzigingen. Een voorbeeld van een servicemesh implementatie die service discovery mogelijk maakt, is Istio\linebreak~\autocite{Morgan2021}.
+
+Een andere belangrijk aspect is load balancing. Een servicemesh verdeelt het verkeer gelijkmatig over de beschikbare service instances, waardoor de prestaties worden geoptimaliseerd, de belasting op afzonderlijke instances onder controle blijft en er ad hoc extra instances kunnen opgespind worden. Dit is vooral nuttig in bedrijfsapplicaties waar veel services parallel moeten worden geschaald om aan de vraag te voldoen~\autocite{Ciobotaru2020}.
+
+Monitoring en tracing van service traffic zijn ook cruciale aspecten bij het gebruik van een servicemesh. Door het instrumenteren van services met monitoring- en tracingfunctionaliteit, kan een servicemesh gedetailleerd inzicht bieden in de prestaties en het gedrag van services. Dit is met name waardevol in bedrijfsapplicaties waar de complexiteit van de interacties tussen services kan leiden tot moeilijkheden bij het identificeren en oplossen van problemen \linebreak ~\autocite{Ciobotaru2021}.
+
+Servicemeshes verhogen de weerbaarheid door het implementeren van verschillende resilience patterns. Hierdoor kan tijdelijke onbeschikbaarheid of overbelasting van services opgevangen worden.
+
+\section{Methodologie}%
+\label{sec:methodologie}
+
+Plan van aanpak
+\begin{itemize}
+
+    \item Fase 1: Literatuuronderzoek en probleemdefinitie (Week 1-2)
+    \begin{itemize}
+        \item Doelstelling: Een grondig begrip ontwikkelen van servicemesh, schaalbaarheid en prestatieproblemen in bedrijfsapplicaties en de architecturale overwegingen en best practices bij het implementeren van een servicemesh identificeren.
+        \item Aanpak:
+        \begin{itemize}
+            \item Uitvoeren van een literatuuronderzoek naar servicemesh technologieën, schaalbaarheid, prestatieproblemen en best practices voor bedrijfsapplicaties.
+            \item Identificeren van de belangrijkste architecturale verschillen tussen \linebreak servicemesh- en monolithische architecturen.
+            \item Analyseren van casestudies en praktijkvoorbeelden om inzicht te krijgen in de voordelen en uitdagingen van het gebruik van servicemesh voor schaalbaarheid en prestatieverbetering.
+        \end{itemize}        
+        \item Resultaat, deliverable(s): Een gedetailleerd overzicht kunnen geven van de concepten en technologieën met betrekking tot servicemesh, schaalbaarheid en prestatieverbetering
+    \end{itemize}            
+    \item Fase 2: Architecturale overwegingen en best practices identificeren (Week 3-4)
+    \begin{itemize}
+        \item Doelstelling De belangrijkste architecturale overwegingen en best practices identificeren die van toepassing zijn op het implementeren van een servicemesh voor schaalbaarheid en prestaties in bedrijfsapplicaties.
+        \item Aanpak: 
+        \begin{itemize}        
+            \item Analyseren van de literatuur en case studies om patronen en gemeenschappelijke elementen te identificeren in de implementatie van \linebreak servicemesh architecturen.
+            \item Analyseren van casestudies en praktijkvoorbeelden om inzicht te krijgen in de voordelen en uitdagingen van het gebruik van servicemesh voor schaalbaarheid en prestatieverbetering.
+        \end{itemize}            
+    \item Resultaat, deliverable(s): Een lijst met belangrijke architecturale overwegingen en best practices voor het implementeren van een servicemesh in bedrijfsapplicaties en een samenvatting van de verschillen tussen \linebreak servicemesh en monolithische architecturen met betrekking tot schaalbaarheid en prestatieverbetering.
+    \end{itemize}
+    \item Fase 3: Casus Implementatie (Week 5-8)
+    \begin{itemize}
+        \item Doelstelling: het implementeren van zowel de monolithische applicatie als de microservices, met servicemesh implementatie, voor de functionaliteiten van de dierenkliniek~\autocite{RameshMF2018}. 
+        
+        \item Aanpak:
+        \begin{itemize}
+            \item Opzetten van de sping-boot applicatie. Verder bouwen bestaande free ware git applicatie.
+            \item Opzetten van een omgeving voor de implementatie van de servicemesh.
+            \item Implementeren van de servicemesh en de microservices.
+            \item Uitvoeren van tests en metingen om de schaalbaarheid en prestatieverbetering te beoordelen.
+         \end{itemize}   
+     \item Resultaat, deliverable(s): Een experimentele implementatie van een servicemesh en een evaluatie van de architecturale overwegingen en best practices.
+    \end{itemize}  
+    \item Fase 4: Vergelijkende analyse en conclusies (Week 9-11)
+    \begin{itemize} 
+        \item Doelstelling: Een vergelijkende analyse uitvoeren tussen de servicemesh\linebreak architectuur en de monolithische architectuur om de verschillen in schaalbaarheid, prestaties en andere relevante aspecten te begrijpen. Op basis hiervan conclusies trekken en aanbevelingen \linebreak doen.
+        \item Aanpak:
+        \begin{itemize} 
+            \item Verzamelen van gegevens en resultaten van eerdere fasen, inclusief literatuuronderzoek, casestudies en experimentele implementatie.
+            \item Analyseren van de verzamelde gegevens om de verschillen tussen   \linebreak servicemesh en monolithische architecturen te identificeren, met betrekking tot schaalbaarheid, prestaties, onderhoud, flexibiliteit ...
+            \item Trekken van conclusies op basis van de analyse en het formuleren van aanbevelingen voor de toepassing van servicemesh in bedrijfsapplicaties.
+        \end{itemize}     
+    \item Resultaat, deliverable(s):  Een vergelijkende analyse tussen servicemesh en monolithische architecturen, inclusief \linebreak conclusies en aanbevelingen voor het gebruik van servicemesh in bedrijfsapplicaties.
+    \end{itemize}   
+    \item Fase 5: Afronding (Week 12-13)
+    \begin{itemize} 
+        \item Doelstelling: Het onderzoeksvoorstel afronden.
+        \item Aanpak:
+        \begin{itemize} 
+            \item Samenstellen en schrijven van het eindrapport van de bachelorproef.
+            \item Nakijken, herzien en redigeren van het rapport.
+            \item Voorbereiden en indienen van het rapport.
+        \end{itemize}     
+        \item Resultaat, deliverable(s): Eindrapport van de bachelorproef.  
+    \end{itemize}
+\end{itemize}
+
+Gedetailleerde flowchart (\ref{fig:flowchart}) en gantt-chart (\ref{fig:gantt}) vind je onderaan terug.
+
+
+\section{Verwachte resultaten}%
+\label{sec:verwachte-resultaten}
+
+Op basis van het literatuuronderzoek vermoed ik dat het gebruik van een servicemesh een positieve impact zal hebben op de schaalbaarheid en prestatiesvan bedrijfsapplicaties. Het biedt de nodige abstractielaag en functionaliteiten om de complexe communicatie en interactie tussen microservices te beheren. Hoewel er altijd alternatieve mogelijkheden en verrassende resultaten kunnen zijn, lijkt het gebruik van een servicemesh zoals Istio een veelgebruikte en geschikte keuze te zijn op basis van de beschikbare literatuur.
+
+
+\section{Discussie, conclusie}%
+\label{sec:discussie-conclusie}
+Ik vermoed dat de impact van het gebruik van een servicemesh in bedrijfsapplicaties significant kan zijn. Het lijkt erop dat het gebruik van een servicemesh de mogelijkheid biedt om microservices op een schaalbare en onderhoudbare manier te beheren, wat kan resulteren in verbeterde prestaties, betere schaalbaarheid en een hogere flexibiliteit.
+
+Er moet echter rekening worden gehouden met enkele beperkingen. Het implementeren van een servicemesh vereist waarschijnlijk een leercurve en investering in het begrijpen en toepassen van de juiste architecturale overwegingen en best practices. Daarnaast kan het beheer van een servicemesh complex zijn en extra infrastructuurkosten met zich meebrengen.
+
+Om deze vermoedens verder te onderzoeken, zou het interessant zijn om de impact van servicemeshes in verschillende scenario's en bedrijfsomgevingen nader te onderzoeken. Het zou ook de moeite waard zijn om te onderzoeken hoe servicemeshes geoptimaliseerd kunnen worden voor specifieke gebruiksscenario's en welke aanpassingen nodig zijn om de prestaties verder te verbeteren.
+
+Ten slotte vermoed ik dat de implementatie van een servicemesh in bedrijfsapplicaties aanzienlijke voordelen kan bieden op het gebied van schaalbaarheid, beschikaarheid, vindbaarheid en prestaties, mits de juiste architecturale overwegingen en best practices worden gevolgd. Het is weliswaar belangrijk om rekening te houden met de beperkingen en de specifieke behoeften van de applicatie en de bedrijfsdoelstellingen.
+
+\begin{figure*}[t]   
+	\centering   
+	\includegraphics[width = \textwidth]{flowchart.png}  
+	\caption{Flow chart}
+	\label{fig:flowchart}				 
+\end{figure*} 
+\begin{figure*}[t]   
+	\centering   
+	\includegraphics[width = \textwidth]{gantt.png}   
+	\caption{Gantt chart}	
+	\label{fig:gantt}	
+\end{figure*} 
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: (fase 4) de gerefereerde werken moeten in BibTeX-bestand
+% bibliografie.bib voorkomen. Gebruik JabRef om je bibliografie bij te
+% houden.
+\nocite{*}
+\printbibliography
+
+\end{document}

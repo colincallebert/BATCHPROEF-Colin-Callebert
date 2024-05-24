@@ -1,0 +1,26 @@
+\chapter*{\IfLanguageName{dutch}{Keuze software}{Software choice}}%
+\label{ch:keuze-software}
+
+\subsection*{Istio}
+Istio is een open-source servicemesh die het beheer van microservices in een Kubernetes cluster vereenvoudigt. Het biedt een uniforme manier om de communicatie tussen services te beveiligen, te beheren en te monitoren. Het is platformonafhankelijk en kan worden geïntegreerd met verschillende Kubernetes-distributies. Istio is een van de meest populaire servicemeshes en wordt ondersteund door grote bedrijven zoals Google, IBM en Red Hat. Het is een volwassen project met een actieve community en een snelgroeiend ecosysteem \autocite{Istio}. 
+
+Bovenstaande redenen en de prijs (gratis) hebben mij doen besluiten om Istio te gebruiken voor het beheren van de microservices in mijn applicatie. 
+
+Voor het opzetten en beheren van de Kubernetes cluster heb ik gekozen voor Minikube. Minikube is een tool die het mogelijk maakt om een lokale Kubernetes cluster te draaien op een enkele docker container. Het is eenvoudig te installeren en te gebruiken en biedt een snelle manier om te experimenteren met Kubernetes en Istio. Minikube is ideaal voor het ontwikkelen en testen van microservices op een lokale machine \autocite{Minikube}. Kubernetes biedt autoscaling fuctionaliteit. Autoscaling is een mechanisme dat automatisch het aantal replica’s van een pod aanpast op basis van de huidige belasting en het gebruik van resources. Dit helpt om applicaties schaalbaar te maken en optimaal gebruik te maken van beschikbare resources, waardoor prestaties worden verbeterd en kosten worden beheerst \autocite{Kubernetes}.
+
+
+In de bijlage \ref{ch:software} is een handleiding te vinden over hoe Istio geïnstalleerd kan worden en hoe het voor de eerste keer gebruikt kan worden.
+
+\subsection*{Monoliet applicatie}
+Voor de monoliet applicatie heb ik gekozen voor een combinatie van Node.js en React. Node.js is een JavaScript runtime die het mogelijk maakt om JavaScript code uit te voeren op de server. Het is lichtgewicht, efficiënt en schaalbaar, waardoor het ideaal is voor het bouwen van webapplicaties. React is een JavaScript-bibliotheek voor het bouwen van gebruikersinterfaces \autocite{Nodejs} \autocite{React}.
+
+Deze combinatie van technologieën is populair en wordt veel gebruikt in de industrie. Het biedt een goede balans tussen prestaties, productiviteit en flexibiliteit. Bovendien zijn er veel bibliotheken en frameworks beschikbaar die het ontwikkelen van webapplicaties met Node.js en React vereenvoudigen.
+
+De data wordt opgeslagen in een MySQL-database en de communicatie tussen de frontend en de backend gebeurt via API-calls met axios. Dit is een eenvoudige en gestroomlijnde manier om gegevens uit te wisselen tussen de verschillende delen van de applicatie \autocite{MySQL} \autocite{Axios}. 
+
+\subsection*{Microservices}
+Microservices geven de mogelijkheid om de applicatie op te splitsen in kleinere en onafhankelijke services. Dit geeft de developper de mogelijkheid om elke service te ontwikkelen in de technologie die er best voor geschikt is. Voor de microservices is er gekozen voor Python en Node.js. Python is een veelzijdige programmeertaal die wordt gebruikt voor het ontwikkelen van webapplicaties, data-analyse, machine learning en nog veel meer. Het is eenvoudig te leren en heeft een grote community en een uitgebreide set bibliotheken en frameworks \autocite{Python}. Node.js is een JavaScript runtime die het mogelijk maakt om JavaScript code uit te voeren op de server. Het is lichtgewicht, efficiënt en schaalbaar, waardoor het ideaal is voor het bouwen van webapplicaties \autocite{Nodejs}. Zowel Python als Node.js zijn uitstekend geschikt voor containergebaseerde applicaties vanwege hun leesbaarheid, rijke ecosystemen, ondersteuning voor microservices en gemakkelijke integratie met containerization tools. Ze bieden ontwikkelaars de middelen om snel en efficiënt robuuste, schaalbare en onderhoudbare applicaties te bouwen en te beheren.
+
+
+De data kan ook opgeslagen worden in verschillende soorten databases. Voor de gebruikersservice en de activiteitenservice is er gekozen voor een MongoDB- database. MongoDB is een NoSQL-database die bekend staat om zijn flexibiliteit en schaalbaarheid. Het is ideaal voor het opslaan van ongestructureerde gegevens en het verwerken van grote hoeveelheden gegevens. Voor de registratieservice is er gekozen voor een MySQL-database. MySQL is een relationele database die bekend staat om zijn robuuste transactiemogelijkheden en uitstekende ondersteuning voor relationele gegevensmodellering \autocite{MongoDB} \autocite{MySQL}.
+

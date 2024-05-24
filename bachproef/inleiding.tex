@@ -5,32 +5,36 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}%
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
-
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
-
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+De complexiteit van moderne bedrijfsapplicaties groeit voortdurend, wat heeft geleid tot de opkomst van verschillende architecturale benaderingen om aan deze behoeften te voldoen. Eén van de belangrijkste overwegingen bij het ontwikkelen van een applicatie is de keuze tussen een monolithische architectuur en een microservicesarchitectuur. Bij een monolithische architectuur wordt de volledige applicatie als één enkel geheel met een centrale codebase en infrastructuur ontwikkeld. Deze aanpak is over het algemeen eenvoudiger te implementeren en te beheren, maar kan problematisch worden naarmate de applicatie groter en complexer wordt. Monolithische architecturen kunnen leiden tot problemen met onderhoud, schaalbaarheid en flexibiliteit doordat alle functionaliteit binnen één enkele codebase wordt ondergebracht.
+
+
+Daartegenover staat de microservicesarchitectuur, waarbij de functionaliteit wordt opgesplitst in kleinere, onafhankelijke services. Elke service heeft zijn eigen codebase en infrastructuur, wat voordelen biedt zoals verbeterde schaalbaarheid, onderhoudbaarheid en flexibiliteit. Echter, deze aanpak introduceert ook nieuwe complexiteiten, met name op het gebied van communicatie en coördinatie tussen de verschillende services.
+
+
+In dit onderzoek richten we ons op een specifieke casus: een applicatie voor een boerderij. Deze applicatie omvat verschillende functionaliteiten, zoals het inloggen/registreren, het maken van afspraken, gegevens wijzigen en het beheren van de afspraken. De huidige implementatie van deze applicatie volgt een monolithische architectuur en is gebouwd met behulp van JavaScript.
+
+
+Om de mogelijkheden van schaalbaarheid en prestatieverbetering verder te verkennen, willen we onderzoeken hoe deze applicatie zou kunnen profiteren van een microservicesarchitectuur. We zullen de functionaliteiten van de applicatie opsplitsen in verschillende microservices, zoals registreren, activiteiten en gebruiker. Deze microservices zouden dan via een servicemesh worden beheerd en met elkaar communiceren.
+
+
+Daarnaast zullen we ook aandacht besteden aan de implementatie-uitdagingen die gepaard gaan met de overgang van een monolithische naar een microservicesarchitectuur. Dit omvat het omgaan met aspecten zoals service discovery, load balancing, netwerkbeveiliging en weerbaarheid. We willen inzicht krijgen in hoe een servicemesh kan bijdragen aan het oplossen van deze uitdagingen en het verbeteren van de algehele prestaties en schaalbaarheid van de applicatie.
+
+
+Verder zullen we onderzoeken welke impact deze overgang heeft op de ontwikkelingsprocessen en de operationele praktijken binnen het team. Dit omvat de leercurve voor ontwikkelaars, de complexiteit van het testen en debuggen van microservices, en de noodzaak voor effectieve monitoring en logging.
+Dit onderzoek beoogt inzicht te verschaffen in de belangrijkste architecturale overwegingen en best practices bij het gebruik van een servicemesh om schaalbaarheid en prestaties te bereiken in bedrijfsapplicaties. We zullen de voordelen, uitdagingen en mogelijke impact van een dergelijke architectuurverandering voor de applicatie onderzoeken. Daarnaast zullen we deze bevindingen vergelijken met de huidige monolithische implementatie om de verschillen en mogelijke voordelen duidelijk te identificeren.
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
-
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+Voor- en nadelen van een service-   architectuur voor bedrijfsapplicaties: architecturale overwegingen en best practices
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+Het beoogde resultaat van deze bachelorproef is het verschaffen van inzicht in de voordelen en nadelen van een monolithische architectuur tegenover een microservices architectuur. Het succes van dit onderzoek wordt bepaald door het identificeren van de belangrijkste architecturale overwegingen, uitdagingen en het evalueren van de mogelijke verbeteringen in schaalbaarheid en prestaties.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}
@@ -45,6 +49,18 @@ In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand v
 
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
+In Hoofdstuk~\ref{ch:keuze-software} wordt de software besproken die gebruikt werd om de microservices architectuur op te zetten en te implementeren.
+
+In Hoofdstuk~\ref{ch:monoliet} wordt de huidige monolithische architectuur van de applicatie besproken en wordt de implementatie van deze architectuur toegelicht.
+
+In Hoofdstuk~\ref{ch:opsplitsen-backend} wordt de opsplitsing en herstructurering van de backend van de applicatie besproken en wordt de implementatie van deze architectuur toegelicht.
+
+In Hoofdstuk~\ref{ch:docker-backend} wordt de opgesplitste backend van de applicatie in Docker-containers geplaatst en wordt de implementatie van deze architectuur toegelicht.
+
+In Hoofdstuk~\ref{ch:implementatie-backend-istio} wordt de implementatie van de services in Isto besproken en wordt de implementatie van deze architectuur toegelicht.
+
+In Hoofdstuk~\ref{ch:testen-prestatieanalyse} worden de prestaties van monoliet en microservices architectuur getest en geanalyseerd.
+
 % TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
 
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+In Hoofdstuk~\ref{ch:conclusie}, ten slotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.

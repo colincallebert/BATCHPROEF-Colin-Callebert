@@ -26,5 +26,21 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
-\lipsum[21-25]
+Om de onderzoeksvraag te beantwoorden, werden de volgende stappen gevolgd:
+
+\begin{itemize}
+  \item Voorstudie
+  \item Implementatie
+  \item Analyse
+\end{itemize} 
+
+Het opzetten van de microservices architectuur zal gebeuren door de monolithische architectuur van de ouderenboerderijapplicatie op te splitsen in verschillende services. 
+\begin{enumerate}
+	\item \textbf{Opzetten van monolithische architectuur:} In deze fase zal ik de ouderenboerderijapplicatie opzetten als een monolithische architectuur. Dit omvat het gebruik van Node.js en React om een toepassing te creëren die een MySQL-database aanroept. De applicatie zal een inlogsysteem, een profielpagina en de mogelijkheid om zich te registreren voor activiteiten bevatten. Deze toepassing bestaat uit een backend en een frontend en draait lokaal op twee verschillende poorten.
+	\item \textbf{Opsplitsen en herstructureren van de backend:} De volgende stap is het opsplitsen en herstructureren van de backend naar drie verschillende services. Een van de voordelen van microservices is dat elke capability kan gebouwd worden in de technologie die er best voor geschikt is. Het gebruikersgedeelte wordt omgezet van Node.js naar Python en zal zijn gegevens ophalen uit een MongoDB-database. Het activiteitengedeelte blijft in Node.js en zal zijn gegevens ophalen uit een MongoDB-database. Het registratiegedeelte blijft in Node.js en zal zijn gegevens blijven ophalen uit een MySQL-database. Elk van deze services zal op een aparte poort draaien.
+	\item \textbf{Draaien van backend in Docker containers:} Vervolgens zullen de drie backend services in Docker-containers worden geplaatst. Deze containers zullen onderling communiceren en communiceren met de databases.
+	\item \textbf{Implementatie van de drie backend services in Istio:} De drie backend services worden in containers geplaatst en geïmplementeerd in Istio. Hierdoor kunnen ze communiceren met de frontend en met elkaar.
+	\item \textbf{Testen en prestatieanalyse:} Tot slot zal ik de prestaties van de applicatie testen en meten. Dit omvat het uitvoeren van verschillende tests en het meten van de prestaties van de applicatie. Er zal ook worden nagekeken wat het effect is van de functionaliteiten die door de servicemesh geboden worden.
+\end{enumerate}
+
 

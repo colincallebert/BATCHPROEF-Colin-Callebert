@@ -13,6 +13,24 @@
 % niet duidelijk zijn?
 % Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
 %onderzoek?
+Uit het onderzoek komen een aantal voor- en nadelen van de microservices architectuur naar voren. Elke microservice kan onafhankelijk van de andere services worden geschaald, wat efficiënter is en gerichte toewijzing van middelen mogelijk maakt. Door gebruik te maken van containers kunnen replica’s gemakkelijk worden opgeschaald of neergeschaald. Dit kan in de meeste containerbeheerplatformen automatisch gebeuren op basis van de belasting.
 
-\lipsum[76-80]
+Ontwikkelaars kunnen verschillende technologieën, talen en frameworks gebruiken voor verschillende services, wat innovatie en gebruik van de beste tool voor de taak bevordert. De robuustheid van het systeem kan worden verhoogd door mechanismen zoals circuit breakers en retries in te bouwen voor elke microservice, wat helpt bij het omgaan met fouten en netwerkproblemen. De meeste service meshes bieden deze resilience-patronen standaard aan voor service-naar-service-aanroepen en soms ook voor uitgaand verkeer.
 
+Teams kunnen afzonderlijke services ontwikkelen, testen en implementeren zonder de rest van de applicatie te verstoren, wat snellere iteraties en releases mogelijk maakt. Tijdens de ontwikkelfase is het verstandig om voor service-naar-service-aanroepen en uitgaand verkeer stubs te voorzien. Kleinere codebases zijn eenvoudiger te begrijpen, te onderhouden en te verbeteren en ze zijn minder vatbaar voor Lehman's wetten over toenemende complexiteit en afnemende kwaliteit. Het implementeren van applicaties binnen containerplatformen is makkelijk te automatiseren. De Kubernetes CLI heeft enkel een Docker image en een aantal deployment YAML-bestanden nodig om pods op te brengen of aan te passen. Alles gebeurt naadloos zonder zichtbare downtime.
+
+Een fout in één microservice beïnvloedt niet noodzakelijkerwijs de gehele applicatie, waardoor de betrouwbaarheid en beschikbaarheid toenemen.
+
+De microservices architectuur heeft echter ook enkele nadelen. Het beheren van vele onafhankelijke services introduceert aanzienlijke operationele complexiteit, inclusief service discovery en monitoring. De meeste servicemeshes en containerplatformen bieden een webportaal, CLI en/of API’s aan waar lijsten van services kunnen worden opgevraagd, evenals relaties tussen de services en metrics.
+
+Communicatie tussen microservices introduceert netwerk latency en overhead, wat de prestaties kan beïnvloeden. Uit de loadtesten die zijn uitgevoerd blijkt dat de grootste latency zich voordoet bij het inkomende verkeer (ingress traffic). Om het aantal ingress calls te beperken kan de UI zelf of een facade service voor de UI ook binnen de servicemesh draaien.
+
+Het testen van microservices kan complexer zijn vanwege de noodzaak om meerdere services en hun interacties te simuleren en valideren. Voor unit tests kan gebruik worden gemaakt van stubs voor uitgaande calls.
+
+De initiële setup en de leercurve voor het team kunnen aanzienlijk zijn, vooral als ze niet vertrouwd zijn met gedistribueerde architecturen. Het debuggen van problemen kan zeker een uitdaging zijn. Het efficiënt verzamelen van loggegevens is zeker een apart onderzoek waard.
+
+De bijdrage aan het onderzoeksdomein ligt in het gedetailleerd in kaart brengen van de voor- en nadelen, evenals in het identificeren van best practices die organisaties kunnen helpen om de voordelen van microservices te maximaliseren en de nadelen te minimaliseren. Dit onderzoek biedt meerwaarde voor ontwikkelteams en IT-beheerders door praktische richtlijnen en inzichten te bieden die hen ondersteunen bij de transitie naar een microservices architectuur.
+
+Er blijven echter nog enkele onduidelijkheden en openstaande vragen. Hoe kan er op een efficiënte manier worden omgegaan met monitoring en logging? Welke nieuwe beveiligingsrisico's ontstaan en hoe kunnen deze het beste worden aangepakt? Verder is het niet duidelijk hoezeer de beperkte infrastructuur waarop getest werd impact heeft op de prestaties van de services.
+
+Ter conclusie, hoewel de overgang naar een microservices architectuur aanzienlijke voordelen biedt, is het essentieel dat organisaties zich bewust zijn van de bijbehorende uitdagingen en bereid zijn om te investeren in de benodigde tools en de implementatie van best practices. Dit onderzoek biedt een waardevolle basis voor organisaties die deze transitie overwegen en draagt bij aan een beter begrip van de dynamiek en complexiteit van service architecturen.
